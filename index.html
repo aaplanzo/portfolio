@@ -29,7 +29,6 @@ body {
   line-height: 1.6;
 }
 
-/* ── NAV ── */
 nav {
   position: sticky;
   top: 0;
@@ -65,7 +64,6 @@ nav ul a {
 
 nav ul a:hover { color: var(--ink); }
 
-/* ── HERO ── */
 .hero {
   max-width: 860px;
   margin: 0 auto;
@@ -119,7 +117,6 @@ nav ul a:hover { color: var(--ink); }
   letter-spacing: 0.02em;
 }
 
-/* ── ABOUT ── */
 .about {
   max-width: 860px;
   margin: 0 auto;
@@ -143,7 +140,6 @@ nav ul a:hover { color: var(--ink); }
   line-height: 1.75;
 }
 
-/* ── PROJECTS ── */
 .projects {
   max-width: 860px;
   margin: 0 auto;
@@ -223,12 +219,6 @@ nav ul a:hover { color: var(--ink); }
   font-family: 'DM Mono', monospace;
 }
 
-.project-card.coming-soon {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* ── CONTACT ── */
 .contact {
   background: var(--accent);
   color: white;
@@ -258,7 +248,6 @@ nav ul a:hover { color: var(--ink); }
 
 .contact a:hover { border-color: white; }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   .about { grid-template-columns: 1fr; gap: 1.5rem; }
   nav ul { gap: 1rem; }
@@ -293,7 +282,7 @@ nav ul a:hover { color: var(--ink); }
 <section class="about" id="about">
   <h2>Background</h2>
   <div class="about-block">
-    <p><strong>From active duty service in the U.S. Marine Corps to a nonprofit fellowship in Los Angeles to the corporate semiconductor world — every stop sharpened a different edge. B.A. in Economics from the University of South Florida.</p>
+    <p>From active duty service in the U.S. Marine Corps to a nonprofit fellowship in Los Angeles to the corporate semiconductor world — every stop sharpened a different edge. B.A. in Economics from the University of South Florida.</p>
   </div>
   <div class="about-block">
     <p>Currently building AI-powered tools and systems using Claude, Python, and modern automation stacks. Focused on applying AI where it creates real impact — in veteran services, community organizations, and underserved communities.</p>
@@ -327,26 +316,26 @@ nav ul a:hover { color: var(--ink); }
       <div class="stack"><span>HTML</span><span>CSS</span><span>Google Fonts</span></div>
     </a>
 
-<a href="04_workflow/" class="project-card">
-  <div class="type">Workflow Automation</div>
+    <a href="04_workflow/" class="project-card">
+      <div class="type">Workflow Automation</div>
       <h3>Form → Sheet Pipeline</h3>
       <p>A workflow that connects a web form to a Google Sheet using a webhook and automation layer.</p>
       <div class="stack"><span>Python</span><span>Flask</span><span>HTML</span><span>CSV</span></div>
-    </div>
+    </a>
 
-<a href="05_api/" class="project-card">
-  <div class="type">API Integration</div>
-  <h3>API Project</h3>
-  <p>A tool that connects to a third-party API and surfaces useful data in a clean interface.</p>
-  <div class="stack"><span>JavaScript</span><span>VA API</span><span>HTML</span></div>
-</a>
+    <a href="05_api/" class="project-card">
+      <div class="type">API Integration</div>
+      <h3>VA Facility Finder</h3>
+      <p>A tool that connects to the VA Facilities API and surfaces VA health, benefits, and vet center locations by state.</p>
+      <div class="stack"><span>JavaScript</span><span>VA API</span><span>HTML</span></div>
+    </a>
 
-<a href="06_chatbot/" class="project-card">
-  <div class="type">AI / LLM</div>
-  <h3>Claude Chatbot</h3>
-  <p>A domain-specific chatbot built on Claude, trained to answer questions for a specific use case.</p>
-  <div class="stack"><span>Claude API</span><span>JavaScript</span><span>HTML</span></div>
-</a>
+    <a href="06_chatbot/" class="project-card">
+      <div class="type">AI / LLM</div>
+      <h3>Veteran Benefits Chatbot</h3>
+      <p>A domain-specific chatbot built on Claude that answers questions about VA benefits, disability claims, GI Bill, and VR&amp;E.</p>
+      <div class="stack"><span>Claude API</span><span>JavaScript</span><span>HTML</span></div>
+    </a>
 
   </div>
 </section>
@@ -354,7 +343,7 @@ nav ul a:hover { color: var(--ink); }
 <section class="contact" id="contact">
   <h2>Let's connect.</h2>
   <p>Open to fellowships, collaborations, and meaningful projects.</p>
-  <a href="mailto:your@email.com">aaplanzo@gmail.com</a>
+  <a href="mailto:aaplanzo@gmail.com">aaplanzo@gmail.com</a>
 </section>
 
 </body>
