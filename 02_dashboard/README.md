@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/29004112/README.md)
 # Veteran Services Dashboard
 
 An interactive data visualization dashboard built with HTML and Chart.js.
