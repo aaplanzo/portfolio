@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veteran Services Data Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f7f4ef; --white: #fff; --border: #d8d3cb;
+  --accent: #1a3a5c; --accent-light: #e8eef5;
+  --text: #1a1a1a; --muted: #7a7570;
+}
+body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh; padding: 2rem 1rem; }
+.container { max-width: 680px; margin: 0 auto; }
+.back { font-size: 0.85rem; color: var(--muted); text-decoration: none; display: inline-block; margin-bottom: 2rem; }
+.back:hover { color: var(--accent); }
+header { border-left: 3px solid var(--accent); padding-left: 1rem; margin-bottom: 2rem; }
+header .type { font-family: 'DM Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+header h1 { font-size: 1.8rem; font-weight: 600; color: var(--accent); }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; margin-bottom: 1.25rem; }
+.card h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.75rem; font-family: 'DM Mono', monospace; }
+.card p { font-size: 0.95rem; color: var(--text); line-height: 1.7; margin-bottom: 0.75rem; }
+.card p:last-child { margin-bottom: 0; }
+.output { background: #1a1a1a; color: #3fb950; font-family: 'DM Mono', monospace; font-size: 0.8rem; padding: 1.25rem; border-radius: 4px; line-height: 1.7; overflow-x: auto; }
+.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+.stack span { background: var(--accent-light); color: var(--accent); font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 2px; font-family: 'DM Mono', monospace; }
+.file-list { list-style: none; }
+.file-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+.file-list li:last-child { border-bottom: none; }
+.file-list .fname { font-family: 'DM Mono', monospace; color: var(--accent); font-size: 0.85rem; }
+.file-list .fdesc { color: var(--muted); font-size: 0.82rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="../" class="back">← Back to Portfolio</a>
+
+  <header>
+    <div class="type">Project 01 · Data Analysis</div>
+    <h1>Veteran Services<br>Data Analysis</h1>
+  </header>
+
+  <div class="card">
+    <h2>About</h2>
+    <p>A Python script that cleans and analyzes a dataset of veterans enrolled in support services. Identifies high-need cases, surfaces employment and income gaps by branch, and flags veterans who are both unemployed and housing-unstable.</p>
+    <div class="stack"><span>Python</span><span>Pandas</span><span>CSV</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Sample Output</h2>
+    <div class="output">
+Loaded 20 records.
+
+==================================================
+SUMMARY STATISTICS
+==================================================
+
+Employment Status Breakdown:
+Employed         11
+Unemployed        6
+Underemployed     3
+
+Benefits Enrollment Rate: 75.0%
+Mental Health Services Access: 60.0%
+
+Avg Disability Rating by Employment Status:
+Employed         36.4
+Underemployed    53.3
+Unemployed       71.7
+
+High-Need Veterans: 6 (30.0%)
+Florida Veterans: 8
+==================================================
+Analysis complete.
+==================================================</div>
+  </div>
+
+  <div class="card">
+    <h2>Files</h2>
+    <ul class="file-list">
+      <li><span class="fname">analyze.py</span><span class="fdesc">— cleaning and analysis script</span></li>
+      <li><span class="fname">veteran_services.csv</span><span class="fdesc">— sample dataset (20 veterans)</span></li>
+      <li><span class="fname">README.md</span><span class="fdesc">— setup and run instructions</span></li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
