@@ -48,11 +48,7 @@ nav .logo {
   text-decoration: none;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-}
+nav ul { list-style: none; display: flex; gap: 2rem; }
 
 nav ul a {
   text-decoration: none;
@@ -88,10 +84,7 @@ nav ul a:hover { color: var(--ink); }
   margin-bottom: 1.5rem;
 }
 
-.hero h1 em {
-  font-style: normal;
-  color: var(--accent);
-}
+.hero h1 em { font-style: normal; color: var(--accent); }
 
 .hero p {
   font-size: 1.125rem;
@@ -101,11 +94,7 @@ nav ul a:hover { color: var(--ink); }
   line-height: 1.7;
 }
 
-.hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
 .hero-tags span {
   background: var(--tag-bg);
@@ -134,17 +123,9 @@ nav ul a:hover { color: var(--ink); }
   grid-column: 1 / -1;
 }
 
-.about-block p {
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.75;
-}
+.about-block p { color: var(--muted); font-size: 0.95rem; line-height: 1.75; }
 
-.projects {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem;
-}
+.projects { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem; }
 
 .projects h2 {
   font-family: 'DM Serif Display', serif;
@@ -203,11 +184,7 @@ nav ul a:hover { color: var(--ink); }
   margin-bottom: 1rem;
 }
 
-.project-card .stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
+.project-card .stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
 .project-card .stack span {
   background: var(--accent-light);
@@ -232,11 +209,7 @@ nav ul a:hover { color: var(--ink); }
   margin-bottom: 0.75rem;
 }
 
-.contact p {
-  opacity: 0.75;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-}
+.contact p { opacity: 0.75; margin-bottom: 1.5rem; font-size: 0.95rem; }
 
 .contact a {
   color: white;
@@ -252,6 +225,193 @@ nav ul a:hover { color: var(--ink); }
   .about { grid-template-columns: 1fr; gap: 1.5rem; }
   nav ul { gap: 1rem; }
 }
+
+/* ── CHATBOT ── */
+#chat-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 56px;
+  height: 56px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(26,58,92,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#chat-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(26,58,92,0.4);
+}
+
+#chat-panel {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.5rem;
+  width: 360px;
+  height: 480px;
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  overflow: hidden;
+  transform: scale(0.95) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#chat-panel.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.chat-header {
+  background: var(--accent);
+  color: white;
+  padding: 0.875rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.chat-header .ch-title { font-size: 0.9rem; font-weight: 600; }
+.chat-header .ch-sub { font-size: 0.72rem; opacity: 0.75; }
+
+.chat-key-bar {
+  background: #f0f4f8;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.chat-key-bar input {
+  flex: 1;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.72rem;
+  font-family: 'DM Mono', monospace;
+  background: white;
+  color: var(--ink);
+}
+
+.chat-key-bar input:focus { outline: none; border-color: var(--accent); }
+.chat-key-bar label { font-size: 0.68rem; color: var(--muted); white-space: nowrap; font-family: 'DM Mono', monospace; }
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cmsg {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.cmsg.user { flex-direction: row-reverse; }
+
+.cmsg-bubble {
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  max-width: 82%;
+}
+
+.cmsg.bot .cmsg-bubble {
+  background: #f0f4f8;
+  color: var(--ink);
+  border-top-left-radius: 2px;
+}
+
+.cmsg.user .cmsg-bubble {
+  background: var(--accent);
+  color: white;
+  border-top-right-radius: 2px;
+}
+
+.chat-typing {
+  display: flex;
+  gap: 3px;
+  padding: 0.55rem 0.75rem;
+  background: #f0f4f8;
+  border-radius: 10px;
+  border-top-left-radius: 2px;
+  width: fit-content;
+}
+
+.chat-typing span {
+  width: 5px;
+  height: 5px;
+  background: var(--muted);
+  border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+
+.chat-input-row input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  background: #f7f4ef;
+  color: var(--ink);
+}
+
+.chat-input-row input:focus { outline: none; border-color: var(--accent); }
+
+.chat-input-row button {
+  padding: 0.5rem 0.9rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: opacity 0.2s;
+}
+
+.chat-input-row button:hover { opacity: 0.85; }
+.chat-input-row button:disabled { opacity: 0.4; cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -292,7 +452,6 @@ nav ul a:hover { color: var(--ink); }
 <section class="projects" id="projects">
   <h2>Projects</h2>
   <p class="section-sub">Six portfolio projects built with Python, APIs, Claude, and modern web tools.</p>
-
   <div class="project-grid">
 
     <a href="01_data_analysis/" class="project-card">
@@ -345,6 +504,122 @@ nav ul a:hover { color: var(--ink); }
   <p>Open to fellowships, collaborations, and meaningful projects.</p>
   <a href="mailto:aaplanzo@gmail.com">aaplanzo@gmail.com</a>
 </section>
+
+<!-- ── FLOATING CHATBOT ── -->
+<button id="chat-toggle" onclick="toggleChat()" title="Chat with me">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+</svg>
+</button>
+
+<div id="chat-panel">
+  <div class="chat-header">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+</svg>
+    <div>
+      <div class="ch-title">Veteran Benefits Assistant</div>
+      <div class="ch-sub">Ask about VA benefits, GI Bill, VR&E, and more</div>
+    </div>
+  </div>
+  <div class="chat-key-bar">
+    <label>API Key:</label>
+    <input type="password" id="chatApiKey" placeholder="Enter Anthropic API key...">
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="cmsg bot">
+      <div class="cmsg-bubble">Hello. Ask me anything about VA benefits, disability claims, GI Bill, or veteran services.</div>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask a question..." onkeydown="if(event.key==='Enter') sendChat()">
+    <button id="chatSendBtn" onclick="sendChat()">Send</button>
+  </div>
+</div>
+
+<script>
+const SYSTEM = `You are a knowledgeable veteran benefits assistant. Help veterans understand VA benefits including disability compensation, GI Bill, VR&E Chapter 31, VA healthcare, TDIU, VA home loans, pension, and appeals. Be clear, direct, and practical. Keep responses concise. Always recommend consulting an accredited VSO or VA-accredited attorney for complex claims.`;
+
+const history = [];
+let chatOpen = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-panel').classList.toggle('open', chatOpen);
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = 'cmsg bot';
+  d.id = 'chatTyping';
+  d.innerHTML = '<div class="chat-typing"><span></span><span></span><span></span></div>';
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('chatTyping');
+  if (el) el.remove();
+}
+
+function appendMsg(role, text) {
+  const msgs = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = `cmsg ${role}`;
+  d.innerHTML = `<div class="cmsg-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const btn = document.getElementById('chatSendBtn');
+  const apiKey = document.getElementById('chatApiKey').value.trim();
+  const text = input.value.trim();
+  if (!text) return;
+  if (!apiKey) { appendMsg('bot', 'Please enter your Anthropic API key above.'); return; }
+
+  input.value = '';
+  btn.disabled = true;
+  appendMsg('user', text);
+  history.push({ role: 'user', content: text });
+  showTyping();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 800,
+        system: SYSTEM,
+        messages: history
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+    if (data.error) {
+      appendMsg('bot', `Error: ${data.error.message}`);
+      history.pop();
+    } else {
+      const reply = data.content[0].text;
+      history.push({ role: 'assistant', content: reply });
+      appendMsg('bot', reply);
+    }
+  } catch(err) {
+    removeTyping();
+    appendMsg('bot', `Connection error: ${err.message}`);
+    history.pop();
+  }
+  btn.disabled = false;
+}
+</script>
 
 </body>
 </html>
