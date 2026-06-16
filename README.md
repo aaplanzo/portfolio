@@ -1,31 +1,21 @@
-# Veteran Services Data Analysis
+# Veteran Services Dashboard
 
-A Python script that cleans and analyzes a dataset of veterans enrolled in support services.
+An interactive data visualization dashboard built with HTML and Chart.js.
 
-## What it does
-- Loads and cleans raw CSV data (standardizes text, parses dates, fills missing values)
-- Flags high-need veterans (unemployed + unstable housing)
-- Outputs summary statistics: employment breakdown, benefits enrollment, disability ratings, income by branch, and state-level filters
+## What it shows
+- Key stats: benefits enrollment, mental health access, high-need case rate
+- Employment status breakdown (doughnut chart)
+- Average disability rating by employment status (bar chart)
+- Average annual income by military branch (horizontal bar)
+- Veterans by branch distribution (pie chart)
 
 ## How to run
+Just open `index.html` in any browser. No server or dependencies needed.
 
-```bash
-pip install pandas
-python analyze.py
-```
+## Tech
+- HTML / CSS / JavaScript
+- Chart.js (CDN)
+- Google Fonts (Inter, Bebas Neue)
 
-## Files
-- `veteran_services.csv` — sample dataset (20 veterans)
-- `analyze.py` — cleaning and analysis script
-
-## Sample Output
-```
-Employment Status Breakdown:
-Employed         11
-Unemployed        6
-Underemployed     3
-
-Benefits Enrollment Rate: 75.0%
-Mental Health Services Access: 60.0%
-High-Need Veterans: 6 (30.0%)
-```
+## Data
+Uses the same dataset as `01_data_analysis/veteran_services.csv`.

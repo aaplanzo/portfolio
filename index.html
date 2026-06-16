@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veteran Services Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #21262d;
+    --accent: #c9a84c;
+    --accent-dim: rgba(201,168,76,0.12);
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --red: #e05252;
+    --green: #3fb950;
+    --blue: #58a6ff;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  header {
+    border-left: 3px solid var(--accent);
+    padding-left: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .stat-card .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-card .sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .chart-card h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+
+  canvas { max-height: 240px; }
+
+  .high-need-bar {
+    margin-top: 1rem;
+    background: var(--border);
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  .high-need-bar .fill {
+    height: 100%;
+    width: 30%;
+    background: var(--red);
+    border-radius: 4px;
+  }
+
+  footer {
+    margin-top: 2.5rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Veteran Services</h1>
+  <p>Support enrollment & outcomes — sample dataset · 20 veterans</p>
+</header>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="label">Total Veterans</div>
+    <div class="value">20</div>
+    <div class="sub">Enrolled in program</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Benefits Enrolled</div>
+    <div class="value">75%</div>
+    <div class="sub">15 of 20 veterans</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Mental Health Access</div>
+    <div class="value">60%</div>
+    <div class="sub">12 of 20 veterans</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">High-Need Cases</div>
+    <div class="value" style="color:var(--red)">30%</div>
+    <div class="sub">Unemployed + unstable housing</div>
+    <div class="high-need-bar"><div class="fill"></div></div>
+  </div>
+  <div class="stat-card">
+    <div class="label">Florida Veterans</div>
+    <div class="value">8</div>
+    <div class="sub">Largest state cohort</div>
+  </div>
+</div>
+
+<div class="charts-grid">
+
+  <div class="chart-card">
+    <h2>Employment Status</h2>
+    <canvas id="employmentChart"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h2>Avg Disability Rating by Employment</h2>
+    <canvas id="disabilityChart"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h2>Avg Annual Income by Branch</h2>
+    <canvas id="incomeChart"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h2>Veterans by Branch</h2>
+    <canvas id="branchChart"></canvas>
+  </div>
+
+</div>
+
+<footer>Built with Chart.js · Data: veteran_services.csv · Portfolio Project 02</footer>
+
+<script>
+const accent = '#c9a84c';
+const muted  = '#7d8590';
+const red    = '#e05252';
+const green  = '#3fb950';
+const blue   = '#58a6ff';
+const purple = '#a371f7';
+
+Chart.defaults.color = muted;
+Chart.defaults.borderColor = '#21262d';
+Chart.defaults.font.family = 'Inter';
+
+// Employment
+new Chart(document.getElementById('employmentChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Employed', 'Unemployed', 'Underemployed'],
+    datasets: [{ data: [11, 6, 3], backgroundColor: [green, red, accent], borderWidth: 0 }]
+  },
+  options: { plugins: { legend: { position: 'bottom' } }, cutout: '65%' }
+});
+
+// Disability rating by employment
+new Chart(document.getElementById('disabilityChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Employed', 'Underemployed', 'Unemployed'],
+    datasets: [{
+      label: 'Avg Rating (%)',
+      data: [36.4, 53.3, 71.7],
+      backgroundColor: [green, accent, red],
+      borderRadius: 4,
+      borderWidth: 0
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+  }
+});
+
+// Income by branch
+new Chart(document.getElementById('incomeChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Navy', 'Air Force', 'Army', 'Marines'],
+    datasets: [{
+      label: 'Avg Income ($)',
+      data: [53250, 45000, 26833, 18333],
+      backgroundColor: [blue, purple, accent, red],
+      borderRadius: 4,
+      borderWidth: 0
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: { x: { ticks: { callback: v => '$' + v.toLocaleString() } } }
+  }
+});
+
+// Branch distribution
+new Chart(document.getElementById('branchChart'), {
+  type: 'pie',
+  data: {
+    labels: ['Marines', 'Army', 'Navy', 'Air Force'],
+    datasets: [{ data: [7, 6, 4, 3], backgroundColor: [red, accent, blue, purple], borderWidth: 0 }]
+  },
+  options: { plugins: { legend: { position: 'bottom' } } }
+});
+</script>
+</body>
+</html>
