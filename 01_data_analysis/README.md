@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/29004011/README.md)
 # Veteran Services Data Analysis
 
 A Python script that cleans and analyzes a dataset of veterans enrolled in support services.
