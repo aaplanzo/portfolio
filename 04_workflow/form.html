@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veteran Intake Form</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f4ef;
+  --white: #ffffff;
+  --border: #d8d3cb;
+  --accent: #1a3a5c;
+  --text: #1a1a1a;
+  --muted: #7a7570;
+  --success: #2d6a4f;
+  --success-bg: #d8f3dc;
+  --error: #c62828;
+  --error-bg: #ffebee;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+header {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+header p {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.full { grid-column: 1 / -1; }
+
+label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.checkbox-group label {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  accent-color: var(--accent);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover { opacity: 0.88; }
+button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.alert {
+  padding: 0.85rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+.alert.success { background: var(--success-bg); color: var(--success); }
+.alert.error { background: var(--error-bg); color: var(--error); }
+
+.submissions-section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+tr:last-child td { border-bottom: none; }
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.5rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 500px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Veteran Services Intake</h1>
+    <p>New enrollment form — data saves to CSV automatically</p>
+  </header>
+
+  <div class="card">
+    <form id="intakeForm">
+      <div class="form-grid">
+
+        <div class="full">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required placeholder="First Last">
+        </div>
+
+        <div>
+          <label for="state">State</label>
+          <input type="text" id="state" maxlength="2" placeholder="FL" required>
+        </div>
+
+        <div>
+          <label for="branch">Branch</label>
+          <select id="branch" required>
+            <option value="">Select...</option>
+            <option>Marines</option>
+            <option>Army</option>
+            <option>Navy</option>
+            <option>Air Force</option>
+            <option>Coast Guard</option>
+            <option>Space Force</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="years_served">Years Served</label>
+          <input type="number" id="years_served" min="1" max="40" required placeholder="4">
+        </div>
+
+        <div>
+          <label for="disability_rating">Disability Rating (%)</label>
+          <input type="number" id="disability_rating" min="0" max="100" placeholder="0">
+        </div>
+
+        <div>
+          <label for="employment_status">Employment Status</label>
+          <select id="employment_status" required>
+            <option value="">Select...</option>
+            <option>Employed</option>
+            <option>Underemployed</option>
+            <option>Unemployed</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="housing_status">Housing Status</label>
+          <select id="housing_status" required>
+            <option value="">Select...</option>
+            <option>Stable</option>
+            <option>Unstable</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label>Benefits Enrolled</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" id="benefits_enrolled"> Yes, currently enrolled</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <label>Mental Health Services</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" id="mental_health_services"> Currently accessing services</label>
+          </div>
+        </div>
+
+        <div class="full">
+          <button type="submit" id="submitBtn">Submit Intake Form</button>
+          <div class="alert success" id="successMsg"></div>
+          <div class="alert error" id="errorMsg"></div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div class="card submissions-section">
+    <h2>Recent Submissions</h2>
+    <div id="tableWrap"><p class="empty">No submissions yet.</p></div>
+    <button onclick="loadSubmissions()" style="margin-top:1rem; padding:0.5rem 1rem; border:1px solid var(--border); background:var(--bg); border-radius:4px; cursor:pointer; font-size:0.85rem;">Refresh</button>
+  </div>
+
+</div>
+
+<script>
+const form = document.getElementById('intakeForm');
+const submitBtn = document.getElementById('submitBtn');
+const successMsg = document.getElementById('successMsg');
+const errorMsg = document.getElementById('errorMsg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+  successMsg.style.display = 'none';
+  errorMsg.style.display = 'none';
+
+  const payload = {
+    name: document.getElementById('name').value,
+    state: document.getElementById('state').value,
+    branch: document.getElementById('branch').value,
+    years_served: document.getElementById('years_served').value,
+    disability_rating: document.getElementById('disability_rating').value || 0,
+    employment_status: document.getElementById('employment_status').value,
+    housing_status: document.getElementById('housing_status').value,
+    benefits_enrolled: document.getElementById('benefits_enrolled').checked ? 'Yes' : 'No',
+    mental_health_services: document.getElementById('mental_health_services').checked ? 'Yes' : 'No',
+  };
+
+  try {
+    const res = await fetch('/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    successMsg.textContent = `✓ ${data.name} enrolled successfully (ID #${data.id})`;
+    successMsg.style.display = 'block';
+    form.reset();
+    loadSubmissions();
+  } catch (err) {
+    errorMsg.textContent = 'Submission failed. Make sure the server is running.';
+    errorMsg.style.display = 'block';
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Submit Intake Form';
+});
+
+async function loadSubmissions() {
+  try {
+    const res = await fetch('/submissions');
+    const rows = await res.json();
+    const wrap = document.getElementById('tableWrap');
+    if (!rows.length) { wrap.innerHTML = '<p class="empty">No submissions yet.</p>'; return; }
+    const cols = ['id','name','state','branch','employment_status','housing_status'];
+    wrap.innerHTML = `<table>
+      <thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+      <tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${r[c]}</td>`).join('')}</tr>`).join('')}</tbody>
+    </table>`;
+  } catch { }
+}
+
+loadSubmissions();
+</script>
+</body>
+</html>
